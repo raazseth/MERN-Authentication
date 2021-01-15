@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useEffect } from "react";
+import "./App.css";
+import Home from "./Home";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { isuserLoggedIn } from "./Actions/authAction";
+import { useDispatch, useSelector } from "react-redux";
+import Signup from "./Signup/Signup";
+import Login from "./Login/Login";
+import ForgetPassword from "./Login/ForgetPassword";
+import ResetPassword from "./Login/ResetPassword";
 
 function App() {
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!auth.authenticate) {
+      dispatch(isuserLoggedIn());
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/signup" component={Signup} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/forgetpassword" component={ForgetPassword} />
+          <Route exact path="/signin/reset/:token" component={ResetPassword} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
