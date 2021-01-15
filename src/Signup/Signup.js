@@ -63,7 +63,7 @@ function Signup() {
 
           <div className="social_icons">
             <GoogleLogin
-              clientId={`534334345890-bj6lbrsmjb5ensomivfucmt1eud3efb8.apps.googleusercontent.com`}
+              clientId={`Your api key `}
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
               cookiePolicy={"single_host_origin"}
